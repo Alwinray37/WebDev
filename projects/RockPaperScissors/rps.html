@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors - Odin Poroject</title>
+    <link rel="stylesheet" href="rps.css">
+</head>
+<body>
+    <header>
+        <a href="../../index.html" id="home-btn">Home</a>
+        <h1>ROCK PAPER SCISSORS</h1>
+    </header>
+    <div class="container">
+        <div id="resultBox">
+            
+        </div>
+        <main id="main">
+            <section id="description">
+                <h1>See if you can beat the Computer, first to 3</h1>
+                <h2>Good Luck!</h2>
+            </section>
+            <section class="rps-game" id="pick">
+                <button type="button" class="choice" id="rock">Rock</button>
+                <button type="button" class="choice" id="paper">Paper</button>
+                <button type="button" class="choice" id="scissors">Scissors</button>
+            </section>
+            <section class="game-scoring">
+                <div class="round" id="rnd">Round: 1</div>
+                <div class="scoring">
+                    <div class="score">
+                        Your Score: 
+                        <div id="playerScr">0</div>
+                    </div>
+                    <div class="score">
+                        Machine Score: 
+                        <div id="compScr">0</div>
+                    </div>
+                </div>
+            </section>
+            <div class="modal restart">
+                <p id="modal-title"></p>
+                <button type="reset" id="reset">Play Again</button>
+            </div>
+            
+        </main>
+    </div>
+    <script src="rps.js"></script> <!-- Linking JS code to Html file -->
+</body>
+</html>

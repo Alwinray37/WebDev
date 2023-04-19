@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-A-Sketch</title>
+    <link rel="stylesheet" href="./etch.css">
+    <script src="./etch.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="../../index.html" id="home-btn">Home</a>
+        <h1>Etch-a-Sketch</h1>
+    </header>
+    <!-- Create a div to contain the slider -->
+    <div id="slider-container">
+        <!-- Create the slider input element -->
+        <input type="range" min="10" max="100" value="50" step="10" id="slider">
+        <div id="slider-value"></div>
+    </div>
+  
+    <div id="grid">
+
+    </div>
+    <div class="pick-container">
+        <div class="pick" id="pickBlue"></div>
+        <div class="pick" id="pickRed"></div>
+        <div class="pick" id="pickYellow"></div>
+    </div>
+</body>
+</html>
