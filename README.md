@@ -1,3 +1,3 @@
-# Ray learning Web Development
+# Ray Learning Web Development
 
-Showcasing what Ray has learned through his courses from Udemy, Odin, and other courses
+Showcasing what Ray has learned through his courses from Udemy, Odin, and other courses.
