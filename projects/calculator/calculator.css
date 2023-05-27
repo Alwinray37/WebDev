@@ -9,7 +9,8 @@
 }
 #output #previous{
     height: 30px;
-    outline: grey 1px solid;
+    /* outline: grey 1px solid; */
+    color: gray;
 }
 #output #current{
     font-size: 30px;
