@@ -1,4 +1,4 @@
-// classList
+// classList for CSS
 //node.classList.add()
     // adds a class to the element
     // consider an h2 tag with no class
