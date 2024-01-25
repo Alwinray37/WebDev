@@ -5,26 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do Project</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous" defer></script>
+    <!-- Personal CSS and JS links -->
     <link rel="stylesheet" href="todo.css">
     <script src="todo.js" defer></script>
 </head>
-<body>
-    <header>
-        <a href="../../index.html" id="home-btn">Home</a>
-        <h1>To-Do List</h1>
-    </header>
-    <main class="container">
-        <ul>
-            <li>Press Enter to save task</li>
-            <li>click on Task to make it done</li>
-            <li>Double click Task to delete</li>
-        </ul>
-        <div class="row" id="add-task-field">
-            <button id="add-task">+</button>
-            <input type="text" name="" id="inputField" placeholder="Add a Task">
+<body class="bg-dark">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a href="../../index.html" class="navbar-brand">Alwinray JS Projects</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" type="button" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- nav dropdown items -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="navbar-nav">
+                    <a href="../../index.html" class="nav-item nav-link">Home</a>
+                </div>
+            </div>
         </div>
-        <div class="row" id="task-container">
+    </nav>
+    <main class="container bg-dark d-flex flex-column gap-3 p-3">
+        <!-- add task box -->
+        <div class="container" id="addTask">
+            <form action="#" class="d-flex justify-content-center align-items-center gap-2">
+                <button class="btn btn-success" type="button" id="addBtn">+</button>
+                <input type="text" id="taskInput" placeholder="Add Task">
+            </form>
+            <button class="btn btn-danger" id="clearTasks">Clear Tasks</button>
         </div>
+        <!-- current tasks will go here -->
+        <div class="container" id="task-container">
+        </div>
+        <!-- Completed tasks go here -->
+        <div class="container" id="completed-container">
+        </div>
+        
     </main> 
 
 </body>

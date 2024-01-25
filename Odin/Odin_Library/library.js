@@ -31,7 +31,7 @@ function addBookToLibrary(){
 // function to create html book cards
 function createBookCard(book, i) {
     return `
-      <div class="col-md-4 h-300">
+      <div class="col h-300">
         <div class="card">
             <div class="card-body h-100 d-flex flex-column justify-content-start gap-3 align-items-center">
 
