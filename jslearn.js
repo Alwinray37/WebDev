@@ -17,13 +17,9 @@ projContainer.setAttribute("class", `
 
 // projects class list
 projectCard.forEach((card) => {
-    card.setAttribute("style", `
-        width: 200px;
-        text-decoration: none;
-    `);
     card.setAttribute("class", `
+        projectCard
         card 
-        bg-white 
         p-2
     `);
 }); 

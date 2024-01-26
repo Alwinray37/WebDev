@@ -99,21 +99,31 @@ section{
     display: flex;
 }
 .modal{
-    background-color: aliceblue;
-    position: absolute;
-    left: 50%;
-    top: 35%;
-    margin: -200px 0 0 -250px;
-    height: 400px;
-    width: 500px;
+    background-color: whitesmoke;
+    height: 200px;
+    width: 300px;
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
-
+    border-radius: 10px;
+    margin: auto;
+    position: relative;
 }
 .modal button{
     height: 50px;
     width: 150px;
+    border-radius: 10px;
+}
+.modalContainer{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

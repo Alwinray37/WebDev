@@ -31,6 +31,7 @@ const compScr = document.querySelector('#compScr');
 const resBox = document.querySelector('#resultBox');
 const modal = document.querySelector('.modal')
 const modalP = document.querySelector('#modal-title')
+const modalContainer = document.querySelector('.modalContainer');
 
 resBox.append("Game Log:")
 // function that plays one round of RPS
@@ -113,7 +114,7 @@ let setHandlers = () => {
 
 // Function when game ends
 let endGame =() => {
-    rpsGame.style.display = 'none';
+    modalContainer.classList.toggle('d-none');
     if(playerScore == 2){
         modalP.innerText ="Congrats! You Win!";
     }else{
@@ -130,6 +131,7 @@ let restart = () =>{
     let reset = document.querySelector('#reset');
     reset.addEventListener('click', e => {
         modal.style.display = 'none';
+        modalContainer.classList.toggle('d-none');
         rpsGame.style.display = 'flex';
         resBox.innerHTML = '';
         resBox.append("Game Log:")

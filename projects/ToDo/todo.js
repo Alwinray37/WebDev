@@ -81,7 +81,25 @@ function addTask(){
         let i = localStorage.length;
         // add task into local storage with index
         localStorage.setItem(i, taskInput.value);
-        getTasksFromLib();
+        let taskHTML = `
+        <div class="d-flex gap-2" id="taskContID-${i}">
+            <input class="checkBox" type="checkbox" id="taskID-${i}"
+            <label for="/">${localStorage[i]}</label>
+        </div>
+        `;
+        taskContainer.innerHTML += taskHTML;
+        // add event listener for checkbox to complete item
+        let checkBox = document.querySelectorAll('.checkBox');
+        for(let check of checkBox){
+            let idNumber = parseInt(check.id.match(/\d+$/)[0]);
+            check.addEventListener('click', ()=>{
+                completeTask(idNumber);
+                check.classList.add("bg-success");
+                // toggle the 'd-none' class in the task 
+                let taskContID = document.querySelector(`#taskContID-${idNumber}`);
+                taskContID.classList.add('d-none');
+            });
+        }
     }
 
     // clear input
@@ -118,8 +136,9 @@ function addListeners(){
     });
 }
 
+// TODO: refactor code
 
 
 getTasksFromLib();
 setClasses();
-addListeners();
+addListeners(); 

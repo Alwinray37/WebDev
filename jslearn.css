@@ -1,29 +1,27 @@
-body{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: rgb(219, 219, 219);
-}
 header{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: whitesmoke;
 }
 main{
     min-height: 100dvh;
 }
-#project-container{
-    /* outline: 1px solid red; */
-}
+
 
 #project-container a:hover{
     transform: scale(1);
-    box-shadow: 3px 3px 0 whitesmoke;
+    box-shadow: 3px 3px 0 rgb(100, 100, 100);
     border: 2px solid black;
 }
 #project-container a:hover h4{
     text-decoration: underline;
 }
-/*  Footer  */
-footer{
-
+.projectCard{
+    background-color: rgba(255, 255, 255, 0.25);
+    width: 200px;
+    text-decoration: none;
+    border: 0;
+    color: whitesmoke;
 }
