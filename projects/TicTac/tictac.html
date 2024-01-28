@@ -28,14 +28,17 @@
             </div>
         </div>
     </nav>
-    <main class="container d-flex flex-column align-items-center">
-        <h2>Tic Tac Toe</h2>
+    <main class="container d-flex flex-column align-items-center gap-3">
+        <h2 class="pt-3">Tic Tac Toe</h2>
         <div id="gameboard" class="container"></div>
         <div id="controls" class="container d-flex justify-content-center align-items-center gap-3">
-            <div id="playerTurn"></div>
-            <button id="startBtn" class="btn btn-success">Start Game</button>
-            <button id="restartBtn" class="btn btn-secondary">Restart</button>
+            <input type="text" id="player1" placeholder="Player 1 Name">
+            <input type="text" id="player2" placeholder="Player 2 Name">
+            <button id="start-button" class="btn btn-success">Start Game</button>
+            <button id="restart-button" class="btn btn-secondary">Restart Game</button>
         </div>
+        <div id="message"></div>
+        <div id="result-display"></div>
     </main>
 </body>
 </html>
