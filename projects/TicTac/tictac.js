@@ -1,100 +1,107 @@
-const startButton = document.querySelector("#start-button");
-const restartButton = document.querySelector("#restart-button");
-const board = document.querySelector("#gameboard");
+const gameContainer = document.querySelector("#gameboard");
 const player1 = document.querySelector("#player1");
 const player2 = document.querySelector("#player2");
-const messageHTML = document.querySelector("#message");
+const startBtn = document.querySelector("#start-button");
+const restartBtn = document.querySelector("#restart-button");
+const resultDisplay = document.querySelector("#message");
 
-// Gameboard
-// an object that contains rendering of the cells of the game
-// the update function to update cell with player mark(X, O) 
+// object of Game, contains the gameboard and functions related to manipulating the board
+// IIFE
 const Gameboard = (() => {
-    // these are the empty cells of the gameboard
-    let gameboard = ["","","","","","","","",""];
-    // output the cells into their own div element within the gameboard div in the indexHTML
+    // these are the cells of the gameboard
+    const gameboard = ["","","","","","","","",""];
+
+    // output the cells into their own div element within the gameboard div in the indexHTML3
+    // contains the add event listeners for the cells
     function render(){
-        let boardHTML = "";
-        gameboard.forEach((square, index) => {
-            boardHTML += `<div class="square" id="square-${index}">${square}</div>`;
+        gameContainer.innerHTML = "";
+        gameboard.forEach((cell, index) => {
+            gameContainer.innerHTML += `<div class="square" id="square-${index}">${cell}</div>`;
         });
-        // append the cells onto the gameboard html
-        board.innerHTML = boardHTML;
         // query all instances of the cells
-        // add an event listener 
+        // add an event listener, will be called from Play obj
         const squares = document.querySelectorAll(".square");
         squares.forEach((square)=>{
-            square.addEventListener("click", (e)=>{Game.handleClick(e)});
+            square.addEventListener("click", (e) =>{Play.handleClick(e)});
         });
     }
-    // this function will update the cell targeted by click event
-    // takes the index of the cell and the mark of the players turn (X,O)
-    function update(index, value){
-        gameboard[index] = value;
-        render();
-    }
-    // getter function to access the gameboard array for other functions to use
-    const getGameboard = () => gameboard;
     
+
+    // getter function to access the gameboard
+    const getGameboard = () => gameboard;
+
     return{
         render,
-        update,
         getGameboard
     }
 })();
 
-// Game 
-// an object that contains the game logic
-const Game = (()=>{
-    let currentPlayerIndex;
+const Play = (() => {
     let gameOver;
-    // factory function to create player info
-    function createPlayer(name, mark){
-        return{
-            name, 
-            mark
-        }
-    };
-    // start the game
-    // initializes the gameboard and grabs the player name values
+    let currentPlayerIndex;
+
+    // start function
+    // initializes the players and render the gameboard
     function start(){
+        // factory functions to create players
+        // players are objects with name and their sign
+        function createPlayer(name, sign){
+            return {
+                name, sign
+            }
+        }
+        // initializing the players into an array
         players = [
-            createPlayer(player1.value, "X"),
+            createPlayer(player1.value, "X"), 
             createPlayer(player2.value, "O")
-        ]; 
-        currentPlayerIndex = 0;
+        ];
         gameOver = false;
+        currentPlayerIndex = 0;
         Gameboard.render();
     }
-    // when user clicks on cell;
-    // grab the index of the square by event.target.id.split() 
-    // if the indexed element from the gameboard is not empty, return
-    // otherwise, update the value of the element indexed in the gameboard
-    // with the players mark
-    // check game conditions either win or tie
+    // reset the gameboard array to emtpy strings
+    // re-render the gameboard
+    // clear displayMSG
+    function restart(){
+        Gameboard.getGameboard().forEach((elem, index)=>{
+            Gameboard.getGameboard()[index] = "";
+        })
+        start();
+        resultDisplay.innerHTML = "";
+    }
+
+    // handleClick for each square logic
+    // grab the id of clicked square using event.target.id (id = "square-2")
+    // using parseInt() and split(), only grab the number at the end of the id, 
+    // set the gameboard[index] set to players[currPlayer].sign 
+    // re-render the board, then change the currPlayer value
     function handleClick(event){
-        if(gameOver){
-            return;
-        }
-        let index = parseInt(event.target.id.split("-")[1]);
+        // for validation
+        if(gameOver){return;}
+
+        let index = parseInt(event.target.id.split('-')[1]);
+        // validation if cell is empty
         if(Gameboard.getGameboard()[index] !== ""){
             return;
         }else{
-            Gameboard.update(index, players[currentPlayerIndex].mark);
-            if(checkForWin(Gameboard.getGameboard(), players[currentPlayerIndex].mark)){
+            Gameboard.getGameboard()[index] = players[currentPlayerIndex].sign;
+            Gameboard.render();
+            // if else statement to check for win or tie
+            if(checkForWin()){
                 gameOver = true;
-                displayController.renderMessage(`${players[currentPlayerIndex].name} Won!`);
-            }else if(checkForTie(Gameboard.getGameboard())){
-                gameOver = true;
-                displayController.renderMessage(`TIE!`);
+                resultDisplay.innerHTML = `${players[currentPlayerIndex].sign} Won!`;
+            }else if(checkForTie()){
+                resultDisplay.innerHTML = "Tie!";
+                let squares = document.querySelectorAll(".square");
+                squares.forEach(square=>square.classList.toggle("bg-warning"));
             }
-            currentPlayerIndex = currentPlayerIndex == 0 ? 1 : 0;
+            currentPlayerIndex = currentPlayerIndex == 0 ? 1 : 0; // x = (if x == 0, set 1; else set 0)
         }
     }
-    // this function contains the win conditions
-    // compares the gameboard array with win conditions by
-    // checking the indeces related to the winning combos and if
-    // they match 
-    function checkForWin(board){
+    // checkForWin; contains the winning combos
+    // will compare the board indeces against the combos by destructuring
+    // return a boolean
+    function checkForWin(){
         const winningCombos = [
             [0, 1, 2],
             [3, 4, 5],
@@ -105,54 +112,47 @@ const Game = (()=>{
             [0, 4, 8],
             [2, 4, 6]
         ];
-        for(let i=0; i< winningCombos.length; i++){
-            const [a,b,c] = winningCombos[i];
+        board = Gameboard.getGameboard();
+        for(let combo of winningCombos){
+            const [a,b,c] = combo; // destructuring 
+            // if board[a] element is not empty, check winning conditions
             if(board[a] && board[a] == board[b] && board[b] == board[c]){
+                // call function to update css for winning streak
+                winningLine(a, b, c);
                 return true;
             }
         }
         return false;
     }
-    // function to check for tie
-    // checks that every cell on the board array is not empty
-    function checkForTie(board){
-        return board.every(cell => cell !== "");
+    // function to change the background color for we find a winning condition
+    function winningLine(a, b, c){
+        let squareA = document.querySelector(`#square-${a}`).classList.toggle("bg-success");
+        let squareB = document.querySelector(`#square-${b}`).classList.toggle("bg-success");
+        let squareC = document.querySelector(`#square-${c}`).classList.toggle("bg-success");
+        // squareA.classList.toggle("bg-success");
+        // squareB.classList.toggle("bg-success");
+        // squareC.classList.toggle("bg-success");
     }
-    // function to restart the game
-    // iterates through the cell html and updates innerHTML to empty
-    function restart(){
-        gameOver = false;
-        for(let i = 0; i < 9; i++){
-            Gameboard.update(i, "");
-        }
-        messageHTML.innerHTML = "";
-        Gameboard.render();
+    // check for tie, returns a boolean
+    // works by using the .every() method and checking if each element is not empty
+    function checkForTie(){
+        return Gameboard.getGameboard().every(e => e!== "");
     }
-    // need to return to be accessible 
+
     return{
         start,
-        handleClick,
-        restart
-    }
-})();
-// displayCrontroller that will output the message based on results
-const displayController = (() => {
-    function renderMessage(message){
-        messageHTML.innerHTML = message;
-    };
-    return{
-        renderMessage
+        restart,
+        handleClick
     }
 })();
 
-
-function btnListeners(){
-    startButton.addEventListener("click", ()=>{
-        Game.start();
+const btnListeners = (() =>{
+    startBtn.addEventListener("click", ()=>{
+        Play.start();                       // this line is temporary, update later
+        startBtn.classList.toggle("d-none");
+        restartBtn.classList.toggle("d-none");
     });
-    restartButton.addEventListener("click", ()=>{
-        Game.restart();
-    });
-}
-// initilize the button listeners
-btnListeners();
+    restartBtn.addEventListener("click", ()=>{
+        Play.restart();
+    })
+})();

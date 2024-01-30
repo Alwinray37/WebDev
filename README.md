@@ -18,3 +18,4 @@ Showcasing what Ray has learned through his courses from Udemy, Odin, and other 
     - display none for the gameboard until player enters start game
     - hide the restart button before the game start, 
     - and hide the start button after game start
+    - highlight the winning streak
