@@ -8,8 +8,9 @@ const projectCard = document.querySelectorAll(".projectCard");
 
 // project container class list
 projContainer.setAttribute("class", `
-    container-fluid 
+    container 
     d-flex 
+    flex-column
     gap-4 
     flex-wrap 
     justify-content-center

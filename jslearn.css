@@ -8,7 +8,9 @@ header{
 main{
     min-height: 100dvh;
 }
-
+h2{
+    color: whitesmoke;
+}
 
 #project-container a:hover{
     transform: scale(1);

@@ -25,7 +25,7 @@
             lastName,
             age,
             isEmployed, 
-            greet: function(){console.log(`Hi! I'm ${this.firstName}`)}
+            greet: function(){console.log(`Hi! I'm ${this.firstName}`)} // method
         }
     }
     const person2 = createPerson("Patrick", "Star", 45, false);

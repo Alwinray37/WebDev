@@ -1,6 +1,6 @@
 // JavaScript Sets
     // a set is a collection of unique values
-    // each value can only occue once in a set
+    // each value can only occur once in a set
 
     // create a set
     const mySet = new Set();

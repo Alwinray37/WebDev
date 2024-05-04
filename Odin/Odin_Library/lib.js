@@ -1,56 +1,52 @@
-// const myLibrary = [];
+// refactoring code for library project
+// using class instead of objects
+const myLibrary = [];
 const bookForm = document.querySelector('#bookForm');
 const submitBtn = document.querySelector("#submit-btn");
 const outputContainer = document.querySelector('#output');
 const modalForm = document.querySelector('#form-modal');
 
-class Book {
-    // constructor 
-    constructor(title, author, pages){
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.outputElement = outputContainer;
-        this.libraryArr = [];
-    }
-    static createBookCard(book, i){
-        return `
-        <div class="col h-300">
-            <div class="card">
-                <div class="card-body h-100 d-flex flex-column justify-content-start gap-3 align-items-center">
-
-                    <p class="card-text m-0">${book.author}</p>
-                    <h4 class="card-title mb-3 mt-3">${book.title}</h4>
-                </div>
-                <div class="card-footer d-flex w-100 justify-content-between ">
-                    <p class="card-text small">${book.pages} Pages</p>
-                    <button type="button" id="deleteBtn${i}" class="delete-btn btn btn-danger p-1">Delete</button>
-                </div>
-            </div>
-        </div>
-        `;
-    }
-
-    static addBookToLibrary(){
-        // erase content to repopulate new content
-        outputContainer.innerHTML = '';
-    
-        // loop through library array and output each book into cards
-        for(let i = 0; i < myLibrary.length; i++){
-            let cardHTML = createBookCard(myLibrary[i], i);
-            outputContainer.innerHTML += cardHTML;
-        }
-    
-        // call the btn event listeners here 
-        addButtonListeners()
-    }; 
+function Book(title, author, pages){
+    // this is the constructor
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = false;
+    this.info = ()=>{return `${this.title} by ${this.author}, ${this.pages} pages. ${(this.read ? "Read" : "Not Read.")}`}
 }
 
 // function to output books into the dom library from array
+function addBookToLibrary(){
+    // erase content to repopulate new content
+    outputContainer.innerHTML = '';
+
+    // loop through library array and output each book into cards
+    for(let i = 0; i < myLibrary.length; i++){
+        let cardHTML = createBookCard(myLibrary[i], i);
+        outputContainer.innerHTML += cardHTML;
+    }
+
+    // call the btn event listeners here 
+    addButtonListeners();
+}
 
 // function to create html book cards
 function createBookCard(book, i) {
-    
+    return `
+      <div class="col h-300">
+        <div class="card">
+            <div class="card-body h-100 d-flex flex-column justify-content-start gap-3 align-items-center">
+
+                <p class="card-text m-0">${book.author}</p>
+                <h4 class="card-title mb-3 mt-3">${book.title}</h4>
+            </div>
+            <div class="card-footer d-flex w-100 justify-content-between ">
+                <p class="card-text small">${book.pages} Pages</p>
+                <button type="button" id="deleteBtn${i}" class="delete-btn btn btn-danger p-1">Delete</button>
+            </div>
+        </div>
+      </div>
+    `;
 }
 
 // Delete book function
@@ -91,4 +87,5 @@ myLibrary.push(new Book("The Hobbit", "J.R.R. Tolkien", 295));
 myLibrary.push(new Book("The Lion, The Witch, and the Wardrobe", "C.S. Lewis", 208));
 myLibrary.push(new Book("Harry Potter and the Deathly Hallows", "J.K. Rowling", 607));
 
+// initialize the functions 
 addBookToLibrary();

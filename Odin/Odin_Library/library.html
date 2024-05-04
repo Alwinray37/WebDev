@@ -35,7 +35,23 @@
 
     <!-- output section -->
     <div class="container display-3 mb-2">My Library</div>
-    <div class="container d-flex gap-2 flex-wrap" id="output"></div>
+    <div class="container d-flex gap-2 flex-wrap" id="output">
+        <!-- books go here -->
+        <!-- temporary -->
+        <div class="col h-300">
+            <div class="card">
+                <div class="card-body h-100 d-flex flex-column justify-content-start gap-3 align-items-center">
+
+                    <p class="card-text m-0">${book.author}</p>
+                    <h4 class="card-title mb-3 mt-3">${book.title}</h4>
+                </div>
+                <div class="card-footer d-flex w-100 justify-content-between ">
+                    <p class="card-text small">${book.pages} Pages</p>
+                    <button type="button" id="deleteBtn${i}" class="delete-btn btn btn-danger p-1">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="form-modal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
@@ -62,6 +78,6 @@
     </div>
 
     <!-- Bootstrap CDN for JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></scrip>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous" defer></script>
 </body>
 </html>
