@@ -1,94 +1,87 @@
 // const myLibrary = [];
 const bookForm = document.querySelector('#bookForm');
 const submitBtn = document.querySelector("#submit-btn");
-const outputContainer = document.querySelector('#output');
+const libraryContainer = document.getElementById('library-container');
 const modalForm = document.querySelector('#form-modal');
 
+// class for the book cards to be outputted in the container
 class Book {
-    // constructor 
-    constructor(title, author, pages){
+    constructor(title, author, pages) {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        this.outputElement = outputContainer;
-        this.libraryArr = [];
     }
-    static createBookCard(book, i){
-        return `
-        <div class="col h-300">
-            <div class="card">
-                <div class="card-body h-100 d-flex flex-column justify-content-start gap-3 align-items-center">
+}
 
-                    <p class="card-text m-0">${book.author}</p>
-                    <h4 class="card-title mb-3 mt-3">${book.title}</h4>
-                </div>
-                <div class="card-footer d-flex w-100 justify-content-between ">
-                    <p class="card-text small">${book.pages} Pages</p>
-                    <button type="button" id="deleteBtn${i}" class="delete-btn btn btn-danger p-1">Delete</button>
-                </div>
-            </div>
-        </div>
-        `;
+// Library class 
+// can have multiple "library containers"
+class Library {
+    constructor() {
+        this.books = [];
     }
 
-    static addBookToLibrary(){
-        // erase content to repopulate new content
-        outputContainer.innerHTML = '';
-    
-        // loop through library array and output each book into cards
-        for(let i = 0; i < myLibrary.length; i++){
-            let cardHTML = createBookCard(myLibrary[i], i);
-            outputContainer.innerHTML += cardHTML;
-        }
-    
-        // call the btn event listeners here 
-        addButtonListeners()
-    }; 
-}
+    // add method to push a new book object into the 'books' array
+    addBook(title, author, pages) {
+        const newBook = new Book(title, author, pages);
+        this.books.push(newBook);
+    }
 
-// function to output books into the dom library from array
+    // remove method that filters out the selected book card
+    removeBook(title) {
+        this.books = this.books.filter(book => book.title !== title);
+    }
 
-// function to create html book cards
-function createBookCard(book, i) {
-    
-}
+    // method to output the book cards
+    renderLibrary() {
+        libraryContainer.innerHTML = '';
 
-// Delete book function
-function deleteBook(index) {
-    myLibrary.splice(index, 1);
-    addBookToLibrary(); // Refresh the display after deletion
-}
+        this.books.forEach(book => {
+            const card = document.createElement('div');
+            card.classList.add('book-card');
+            card.innerHTML = `
+                <p>Author: ${book.author}</p>
+                <h3>${book.title}</h3>
+                <p>Pages: ${book.pages}</p>
+                <button class="delete-btn" data-title="${book.title}">Delete</button>
+            `;
+            libraryContainer.appendChild(card);
+        });
 
-function addButtonListeners(){
-    // book button event listener to add book to library
-    submitBtn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        // Get form values
-        let author = document.getElementById('author');
-        let title = document.getElementById('title');
-        let pages = document.getElementById('pages');
-
-        // form validation; if input values are empty
-        if(author.value != "" && title.value != "0" && pages.value != "0"){
-            myLibrary.push(new Book(`${title.value}`, `${author.value}`, pages.value));
-            addBookToLibrary();
-
-            // clear the input fields
-            bookForm.reset();
-        }
-    });
-
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    for(let i = 0; i < deleteButtons.length; i++){
-        deleteButtons[i].addEventListener('click', ()=>{
-            deleteBook(i);
+        // Add event listener for delete button
+        libraryContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete-btn')) {
+                const title = e.target.dataset.title;
+                this.removeBook(title);
+                this.renderLibrary();
+            }
         });
     }
 }
 
-// adding temp books 
-myLibrary.push(new Book("The Hobbit", "J.R.R. Tolkien", 295));
-myLibrary.push(new Book("The Lion, The Witch, and the Wardrobe", "C.S. Lewis", 208));
-myLibrary.push(new Book("Harry Potter and the Deathly Hallows", "J.K. Rowling", 607));
+const myLibrary = new Library();
 
-addBookToLibrary();
+// adding temporary books
+myLibrary.addBook('The Great Gatsby', 'F. Scott Fitzgerald', 180);
+myLibrary.addBook('To Kill a Mockingbird', 'Harper Lee', 281);
+myLibrary.addBook('1984', 'George Orwell', 328);
+
+// Render the library
+myLibrary.renderLibrary();
+
+// Add event listener for adding a new book
+submitBtn.addEventListener('click', (e) => {
+    // Code to open a form to add a new book, then call myLibrary.addBook() with the form data
+    e.preventDefault();
+    // Get form values
+    let author = document.getElementById('author');
+    let title = document.getElementById('title');
+    let pages = document.getElementById('pages');
+
+    // form validation; if input values are empty
+    if(author.value != "" && title.value != "0" && pages.value != "0"){
+        myLibrary.addBook(title.value, author.value, pages.value);
+        myLibrary.renderLibrary();
+        // clears the input fields
+        bookForm.reset();
+    }
+});

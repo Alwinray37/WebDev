@@ -31,3 +31,7 @@
 
     const house1 = new House('red');
     const house2 = new House('blue');
+
+/**
+ * 
+ */
