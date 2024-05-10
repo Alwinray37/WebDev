@@ -15,7 +15,7 @@ h2{
 #project-container a:hover{
     transform: scale(1);
     box-shadow: 3px 3px 0 rgb(100, 100, 100);
-    border: 2px solid black;
+    border: 2px solid whitesmoke;
 }
 #project-container a:hover h4{
     text-decoration: underline;
@@ -23,7 +23,17 @@ h2{
 .projectCard{
     background-color: rgba(255, 255, 255, 0.25);
     width: 200px;
+    height: 250px;
     text-decoration: none;
     border: 0;
+    border-radius: 10px;
+    padding: 10px;
     color: whitesmoke;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: max-content;
+    margin-bottom: 20px;
 }
