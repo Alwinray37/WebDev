@@ -1,0 +1,173 @@
+/* Global Styles: This file is usually meant for global styles that affect the entire application. Styles defined here apply to everything in the app unless overridden by more specific styles.
+Purpose: You use index.css to define general styling rules, such as:
+Global resets or normalization (e.g., removing margins, setting font styles).
+Body-level styles (e.g., setting a background color or font family for the entire page).
+Universal elements like headers, footers, or styles that apply across multiple components. */
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+header{
+  /* outline: 1px solid red; */
+  background-color: rgb(60, 126, 59);
+  width: 100vw; 
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: whitesmoke;
+  box-shadow: 0px 10px 0 0  rgb(115, 81, 37);
+  
+}
+.container{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100vh;
+}
+.container > *{
+  outline: 1px solid gray;
+  padding: 20px;
+  border-radius: 15px;
+}
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  margin: 0;
+  align-items: center;
+  text-align: center;
+}
+ul{
+  display: flex;
+  /* flex-direction: column; */
+  gap: 10px;
+}
+li{
+  list-style: none;
+  cursor: pointer;
+}
+a{
+  color: whitesmoke;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #626262;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #e0e0e0;
+  }
+}
+.card{
+  border: 1px solid white;
+  width: 300px;
+  border-radius: 10px;
+  /* padding: 10px; */
+  text-align: center;
+}
+.card img{
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+/* .btn{
+  background-color: forestgreen;
+  color: white;
+  padding: 10ps 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+} */
+
+.to-do-list{
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: #e0e0e0;
+}
+.to-do-list ol{
+  padding: 0;
+}
+.to-do-list li{
+  background-color: whitesmoke;
+  border: 1px solid black;
+  margin: 10px 0;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+}
+.to-do-list .add-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+}
+.add-container input{
+  /* outline: 1px solid black; */
+  border-radius: 5px;
+  height: 100%;
+}
+
+.text{
+  flex: 1;
+}
+.add-btn{
+  background-color: rgba(0, 128, 0, 0.505);
+  margin-left: 10px;
+  height: 100%;
+}
+.delete-btn{
+  background-color: rgba(255, 0, 0, 0.501);
+}
