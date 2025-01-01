@@ -11,9 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "depcheck": "^1.4.7",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "give-me-a-joke": "^0.5.1",
     "method-override": "^3.0.0",
     "uuid": "^10.0.0"
   }
